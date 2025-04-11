@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww15960\viewh13780\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Horizontal timing: \
+Line 800 pixels (50 cycles): \
+Visible 640 pixels (0..39 cycles)\
+Front porch 16 pixels (40th cycle)\
+Sync pulse 96 pixels (41..46 cycles)\
+Back porch 48 pixels (47..49 cycles)\
+\
+Variant counting 0..49 and reset on 50 async or 49 sync:\
+Blank = 40..50= 32 + (8..16+2) = F32*(F8+F16)\
+	Front = (F32*F8)*!F4*!*F2*!F1*\
+Sync = (F32*F8)*(F1+F2+F4)*!(F1*F2*F4)\
+	Back = (F32*F8*F4*F2*F1)+(F32*F16)\
+Reset async = (F32*F16*F2)\
+Reset sync = (F32*F16*F1)\
+\
+SEEM ONLY Sync AND Blank IS USED\
+H0 = F1\
+H1 = F2\
+H2 = F4\
+H3 = F8\
+H4 = F16\
+H5 = F32\
+\
+Formulas =\
+!F40 = F32*F8\
+!F48 = F32*F16\
+Blank = F40+F48\
+	Front = F40*!F4*!F2*!F1\
+Seven = F1*F2*F4\
+NotZero = F1+F2+F4\
+!Sync = F40*!Seven*NotZero\
+	F47 = F40*Seven\
+	Back = F47+F48\
+\
+\
+For Spectrum: 256x192 pixels or 32x24 chars - 32 in horizontal line.\
+Therefore, for Spectrum:\
+Visible = 0..31\
+Blank = 32 ..49\
+Sync (moved 4 forward and have 4 backward) = 37..42\
+Sync = F32*(F1*F4..F8..F2)\
+}
